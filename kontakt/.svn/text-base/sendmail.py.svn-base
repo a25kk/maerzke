@@ -1,0 +1,18 @@
+#!/usr/bin/python
+
+import cgi
+import smtplib
+mTo = "cb@vorwaerts-werbung.de"
+
+mFrom = "kontaktformular@plakatwerbung-maerzke.de"
+subj = "Anfrage Kontaktformular"
+data = cgi.FieldStorage ()
+msg = "To: %s\n" %mTo
+msg = msg + "From: %s\n" %mFrom
+msg = msg + "Subject: %s\n\n" %subj
+msg = msg + str (data)
+server = smtplib.SMTP ('localhost')
+
+server.sendmail (mFrom, mTo, msg)
+server.close ()
+print "Location:http://www.plakatwerbung-maerzke.de/kontakt/sent.html \n\n"
